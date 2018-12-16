@@ -32,7 +32,7 @@ export default class CountryTable extends Component {
         className="ui celled striped table"
         data={this.state.sortedItems}
         onRowClick={(record, index, e) => {
-          this.props.onSelect(record.countryName);
+          this.props.onSelect(record.name);
         }}
         columns={columns.map(column => ({
           ...column,

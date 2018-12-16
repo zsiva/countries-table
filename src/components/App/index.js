@@ -1,8 +1,10 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
-import { fetchData } from './actions';
-import { Loader, Dimmer } from 'semantic-ui-react';
-import Table from './components/Table';
+import { fetchData } from '../../actions';
+import { Loader, Dimmer, Message, Container } from 'semantic-ui-react';
+import Table from '../Table';
+import Detail from '../Detail';
+import Page from '../Page';
 
 class App extends Component {
   state = {
@@ -14,7 +16,7 @@ class App extends Component {
   }
 
   onSelect = name => {
-    const selected = this.props.items.find(it => it.countryName === name);
+    const selected = this.props.items.find(it => it.name === name);
     this.setState({ selectedCountry: selected });
   };
 
@@ -27,25 +29,31 @@ class App extends Component {
       );
     }
     if (this.props.error) {
-      return <p>There has been an error, try again later.</p>;
+      return (
+        <Page>
+          <Container>
+            <Message negative>
+              <Message.Header>There has been an error, try again later.</Message.Header>
+            </Message>
+          </Container>
+        </Page>
+      );
     }
     return (
-      <Fragment>
-        <header>
-          <h4>
-            Country information based on Happiness Index, Population, Life Expectancy, Media Age and
-            Price for a Big Mac.
-          </h4>
-        </header>
-
-        <div className="appWrapper">
+      <Page>
+        <Fragment>
+          {Object.keys(this.state.selectedCountry).length === 0 ? (
+            <p>Please select a country from the list</p>
+          ) : (
+            <Detail {...this.state.selectedCountry} />
+          )}
           <h4>List of countries </h4>
 
           {this.props.items.length > 0 && (
             <Table items={this.props.items} onSelect={this.onSelect} />
           )}
-        </div>
-      </Fragment>
+        </Fragment>
+      </Page>
     );
   }
 }
