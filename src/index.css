@@ -5,7 +5,7 @@
 header {
   background: black;
   color: white;
-  padding: 2rem 1rem;
+  padding: 1rem;
 }
 
 div[class^='table---thead'] {
