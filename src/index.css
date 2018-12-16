@@ -7,3 +7,10 @@ header {
   color: white;
   padding: 2rem 1rem;
 }
+
+div[class^='table---thead'] {
+  text-transform: capitalize;
+}
+div[class^='table---tr'] {
+  cursor: pointer;
+}

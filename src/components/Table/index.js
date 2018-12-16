@@ -23,7 +23,7 @@ export default class CountryTable extends Component {
   render() {
     const { sortColumnKey, sortOrder } = this.state;
     const columns = Object.keys(this.state.sortedItems[0]).map(it => ({
-      title: it,
+      title: it.replace(/_/g, ' '),
       dataIndex: it,
     }));
 
