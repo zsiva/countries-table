@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from 'react';
 import Table from '@trendmicro/react-table';
-import { Input } from 'semantic-ui-react';
+import { Input, Button } from 'semantic-ui-react';
 import sortAttributes from '../../utils/sortAttributes';
 
 export default class CountryTable extends Component {
@@ -30,6 +30,12 @@ export default class CountryTable extends Component {
     }));
   };
 
+  clearFilters = () => {
+    this.setState(state => ({
+      filterString: '',
+      sortedItems: this.props.items.sort(sortAttributes(state.sortColumnKey, state.sortOrder)),
+    }));
+  };
   render() {
     const { sortColumnKey, sortOrder } = this.state;
     const columns = Object.keys(this.props.items[0]).map(it => ({
@@ -43,7 +49,9 @@ export default class CountryTable extends Component {
           onChange={this.onChange}
           icon={{ name: 'search', circular: true, link: true }}
           placeholder="Search..."
+          value={this.state.filterString}
         />
+        <Button floated="right" onClick={this.clearFilters} content="Clear filter" />
 
         <Table
           className="ui celled striped table"
