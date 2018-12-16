@@ -1,0 +1,10 @@
+.detailWrapper {
+  padding: 1rem;
+}
+
+.itemWrapper {
+  margin-bottom: 1rem;
+}
+.itemWrapper strong {
+  margin-right: 0.5rem;
+}
