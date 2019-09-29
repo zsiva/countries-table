@@ -1,76 +1,35 @@
-import React, { Component, Fragment } from 'react';
-import { connect } from 'react-redux';
-import { fetchData } from '../../actions';
-import { Loader, Dimmer, Message, Container } from 'semantic-ui-react';
-import Table from '../Table';
-import Detail from '../Detail';
-import Page from '../Page';
+import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { fetchData } from "../../redux-store/countries";
+import List from "../pages/List";
+import Graph from "../pages/Graph";
 
-class App extends Component {
-  state = {
-    selectedCountry: {},
-  };
-
-  componentDidMount() {
-    this.props.fetchData();
-  }
-
-  onSelect = name => {
-    const selected = this.props.items.find(it => it.name === name);
-    this.setState({ selectedCountry: selected });
-  };
-
-  render() {
-    if (this.props.loading) {
-      return (
-        <Dimmer active inverted>
-          <Loader inverted>Fetching countries</Loader>
-        </Dimmer>
-      );
-    }
-    if (this.props.error) {
-      return (
-        <Page>
-          <Container>
-            <Message negative>
-              <Message.Header>There has been an error, try again later.</Message.Header>
-            </Message>
-          </Container>
-        </Page>
-      );
-    }
-    return (
-      <Page>
-        <Fragment>
-          {Object.keys(this.state.selectedCountry).length === 0 ? (
-            <p>Please select a country from the list</p>
-          ) : (
-            <Detail {...this.state.selectedCountry} />
-          )}
-          <h4>List of countries </h4>
-
-          {this.props.items.length > 0 && (
-            <Table items={this.props.items} onSelect={this.onSelect} />
-          )}
-        </Fragment>
-      </Page>
-    );
-  }
-}
-
-const mapStateToProps = state => {
-  return {
-    items: state.countries.items,
-    loading: state.countries.loading,
-    error: state.countries.error,
-  };
+const Header = () => {
+  return (
+    <header>
+      <Link to="/">List</Link>
+      <Link to="/population">Population graph</Link>
+    </header>
+  );
 };
 
-const mapDispatchToProps = dispatch => ({
-  fetchData: () => dispatch(fetchData()),
-});
+const App = () => {
+  const dispatch = useDispatch();
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(App);
+  useEffect(() => {
+    dispatch(fetchData());
+  }, [dispatch]);
+
+  return (
+    <Router>
+      <Route component={Header} />
+      <Switch>
+        <Route path="/" exact component={List} />
+        <Route path="/population" exact component={Graph} />
+      </Switch>
+    </Router>
+  );
+};
+
+export default App;
