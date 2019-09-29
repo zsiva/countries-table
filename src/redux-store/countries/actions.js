@@ -17,7 +17,7 @@ export function fetchData() {
     fetch(
       `http://inqstatsapi.inqubu.com/?api_key=8fe15e4caa7ef85c&data=${dataParameters.join(
         ","
-      )}&cmd=getWorldData`
+      )}&cmd=getWorldData&addRegion=true`
     )
       .then(response => response.json())
       .then(items => {

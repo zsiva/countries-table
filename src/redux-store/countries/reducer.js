@@ -26,7 +26,8 @@ export default function countries(state = initialState, action) {
         happiness_index: item.happiness_index,
         median_age: item.median_age,
         life_expectancy: item.life_expectancy,
-        population: item.population
+        population: item.population,
+        region: item.region
       }));
       return {
         ...state,
