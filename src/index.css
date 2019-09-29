@@ -8,9 +8,13 @@ header {
   padding: 1.5rem 1rem;
 }
 
-div[class^='table---thead'] {
+header a {
+  margin: 1rem;
+}
+
+div[class^="table---thead"] {
   text-transform: capitalize;
 }
-div[class^='table---tr'] {
+div[class^="table---tr"] {
   cursor: pointer;
 }
