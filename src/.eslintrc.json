@@ -1,0 +1,37 @@
+{
+  "extends": ["airbnb", "prettier", "prettier/react"],
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true,
+    "jest": true
+  },
+  "plugins": ["react-hooks"],
+  "rules": {
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "error",
+    "react/no-array-index-key": 0,
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+    "react/prefer-stateless-function": [0, {}],
+    "react/forbid-prop-types": [0, {}],
+    "react/destructuring-assignment": [0, {}],
+    "react/sort-comp": 0,
+    "jsx-a11y/no-static-element-interactions": [0, {}],
+    "import/prefer-default-export": 0,
+    "import/order": 0,
+    "jsx-quotes": [2, "prefer-single"],
+    "quotes": [2, "single"],
+    "prefer-arrow-callback": "error",
+    "no-nested-ternary": "error",
+    "comma-dangle": [1, "never"],
+    "no-trailing-spaces": "error",
+    "no-multi-spaces": "error",
+    "eqeqeq": "error",
+    "eol-last": ["error", "always"],
+    "max-len": ["error", { "code": 100, "tabWidth": 4 }],
+    "no-underscore-dangle": "off",
+    "camelcase": "off",
+    "class-methods-use-this": "off"
+  }
+}
